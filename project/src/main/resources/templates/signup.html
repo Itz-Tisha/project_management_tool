@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sign Up Form</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+  }
+
+  .signup-container {
+    background: #fff;
+    padding: 40px 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(102, 126, 234, 0.4);
+    width: 360px;
+    text-align: center;
+  }
+
+  .signup-container h2 {
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #4a4a4a;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #555;
+    font-size: 14px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+  }
+
+  button {
+    width: 100%;
+    padding: 14px 0;
+    background: #667eea;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: #5a67d8;
+  }
+
+  
+  @media (max-width: 400px) {
+    .signup-container {
+      width: 90%;
+      padding: 30px 25px 20px;
+    }
+  }
+  
+  .signup-link {
+    color: #667eea;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+  }
+
+  .signup-link:hover {
+    color: #357abd;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Create an Account</h2>
+    <form action="/adduser" method="POST" novalidate>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="john@example.com" required />
+	  
+	  <label for="password">Password</label>
+	        <input type="password" id="password" name="password" placeholder="......" required />
+
+      <button type="submit">Sign Up</button>
+	  <p>
+	      Already have an account?
+	      <a th:href="@{/loginform}" class="signup-link">Login</a>
+	    </p>
+    </form>
+  </div>
+
+</body>
+</html>

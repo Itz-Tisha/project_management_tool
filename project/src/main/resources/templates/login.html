@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login</title>
+<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+	  * {
+	    box-sizing: border-box;
+	  }
+	  body {
+	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	     background: linear-gradient(135deg, #667eea, #764ba2);
+	    height: 100vh;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    margin: 0;
+	  }
+
+	  .login-container {
+	    background: #fff;
+	    padding: 40px 35px;
+	    border-radius: 12px;
+	    width: 350px;
+	    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+	    transition: box-shadow 0.3s ease;
+	  }
+	  .login-container:hover {
+	    box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+	  }
+
+	  .login-container h2 {
+	    margin-bottom: 25px;
+	    color: #333;
+	    font-weight: 700;
+	    text-align: center;
+	  }
+
+	  label {
+	    display: block;
+	    font-weight: 600;
+	    margin-bottom: 8px;
+	    color: #555;
+	    font-size: 14px;
+	  }
+	
+	  input[type="email"],
+	  input[type="password"] {
+	    width: 100%;
+	    padding: 12px 14px;
+	    margin-bottom: 20px;
+	    border: 2px solid #ddd;
+	    border-radius: 10px;
+	    font-size: 15px;
+	    transition: border-color 0.3s ease;
+	  }
+	  input[type="email"]:focus,
+	  input[type="password"]:focus {
+	    border-color: #4a90e2;
+	    outline: none;
+	    background-color: #fafcff;
+	  }
+	
+	  button {
+	    width: 100%;
+	    padding: 14px;
+	    border: none;
+	    border-radius: 10px;
+	    background-color: #667eea;
+	    color: white;
+	    font-size: 17px;
+	    font-weight: 700;
+	    cursor: pointer;
+	    transition: background-color 0.3s ease;
+	  }
+	  button:hover {
+	    background-color: #357abd;
+	  }
+	
+	  @media (max-width: 400px) {
+	    .login-container {
+	      width: 90%;
+	      padding: 30px 20px;
+	    }
+	  }
+	  
+	  .signup-link {
+	    color: #667eea;
+	    font-weight: 600;
+	    text-decoration: none;
+	    margin-left: 5px;
+	    transition: color 0.3s ease;
+	  }
+	
+	  .signup-link:hover {
+	    color: #357abd;
+	  }
+
+	</style>
+	</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form action="/login" method="get">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="john@example.com" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="......" required />
+
+      <button type="submit">Login</button>
+	  <p>
+	    Do not have an account?
+	    <a th:href="@{/sign_form}" class="signup-link">Sign-Up</a>
+	  </p>
+
+    </form>
+  </div>
+
+</body>
+</html>

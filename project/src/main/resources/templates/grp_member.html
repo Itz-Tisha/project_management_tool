@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eef2f7;
+    }
+
+    nav {
+      background-color: #0d6efd; 
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+    }
+
+    nav .logo {
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #a8c0ff;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 25px 0 20px 0;
+      color: #333;
+      font-size: 1.8rem;
+    }
+
+    .table-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding: 0 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      min-width: 500px;
+    }
+
+    thead {
+      background-color: #4a90e2;
+      color: white;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f1f5f9;
+    }
+
+    tbody tr:hover {
+      background-color: #e0eefa;
+    }
+
+    .id {
+      font-weight: 500;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        margin: 20px 10px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a th:href="@{/}" class="logo">ProjectGroups</a>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/creategroup}">Create Group</a></li>
+      <li><a th:href="@{/notification}">Notifications</a></li>
+      <li><a th:href="@{/asamember}">As a teammember</a></li>
+      <li><a th:href="@{/loginform}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <h2>User List</h2>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="u : ${u}">
+          <td th:text="${u.name}" class="id"></td>
+          <td th:text="${u.email}" class="id"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

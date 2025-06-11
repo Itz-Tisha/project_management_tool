@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Live Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+
+    nav {
+      background-color: #0d6efd;
+      padding: 15px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav .logo {
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 10px 0 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #a8c0ff;
+    }
+
+    .chat-container {
+      max-width: 900px;
+      width: 95%;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    thead {
+      display: none;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      word-wrap: break-word;
+      word-break: break-word;
+      vertical-align: top;
+    }
+
+    .sender {
+      font-weight: bold;
+      color: #2c3e50;
+      width: 120px;
+    }
+
+    .message {
+      color: #34495e;
+    }
+
+    .chat-input {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chat-input input[type="text"] {
+      flex: 1 1 200px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .chat-input input[type="file"] {
+      flex: 1 1 180px;
+    }
+
+    .chat-input button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .chat-input button:hover {
+      background-color: #2980b9;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0 0 0;
+      }
+
+      .chat-input {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .chat-input input,
+      .chat-input button {
+        width: 100%;
+      }
+
+      .sender {
+        display: block;
+        width: 100%;
+      }
+
+      .message {
+        display: block;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <nav>
+      <a th:href="@{/}" class="logo">ProjectGroups</a>
+      <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/creategroup}">Create Group</a></li>
+        <li><a th:href="@{/notification}">Notifications</a></li>
+        <li><a th:href="@{/asamember}">As a teammember</a></li>
+        <li><a th:href="@{/loginform}">Logout</a></li>
+      </ul>
+    </nav>
+
+    <h2>Live Chat</h2>
+
+    <table>
+      <thead></thead>
+      <tbody>
+        <tr th:each="c : ${chat}">
+          <td class="sender" th:text="${c.user.name}"></td>
+          <td class="message">
+            <span th:if="${!c.isFile}" th:text="${c.msg}"></span>
+            <a th:if="${c.isFile}" th:href="@{/download/{id}(id=${c.id})}" th:text="${c.fileName}"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form th:action="@{/send_msg/{uid}/{gid}(uid=${uid},gid=${gid})}" method="post" enctype="multipart/form-data" class="chat-input">
+      <input type="text" name="msg" placeholder="Type your message...">
+      <input type="file" name="file" accept="application/pdf">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+</body>
+</html>

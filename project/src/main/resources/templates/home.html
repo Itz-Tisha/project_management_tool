@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Groups Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    nav {
+      background-color: #0d6efd; 
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav .logo {
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #a8c0ff;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #222;
+    }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 40px 0 20px;
+      color: #444;
+      border-bottom: 2px solid #0d6efd;
+      padding-bottom: 5px;
+      width: fit-content;
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
+    }
+
+    thead {
+      background-color: #e9ecef;
+      box-shadow: inset 0 -2px 0 #0d6efd;
+    }
+    thead th {
+      padding: 15px 20px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: left;
+      color: #555;
+    }
+
+    tbody tr {
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.07);
+    }
+    tbody tr:hover {
+      background-color: #f0f6ff;
+      box-shadow: 0 4px 12px rgb(13 110 253 / 0.2);
+    }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: 1rem;
+      color: #333;
+      vertical-align: middle;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn-link {
+      background-color: red;
+      color: white;
+      padding: 7px 14px;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      box-shadow: 0 2px 5px rgb(13 110 253 / 0.4);
+    }
+    .btn-link:hover {
+      background-color: #084edc;
+      box-shadow: 0 4px 12px rgb(8 78 220 / 0.6);
+    }
+    button.btn {
+      background-color: #dc3545;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgb(220 53 69 / 0.4);
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+    }
+    button.btn:hover {
+      background-color: #b02a37;
+      box-shadow: 0 4px 10px rgb(176 42 55 / 0.6);
+    }
+    @media (max-width: 650px) {
+      .actions {
+        flex-direction: column;
+      }
+    }
+	
+	@media (max-width: 768px) {
+	  nav {
+	    flex-direction: column;
+	    align-items: flex-start;
+	    padding: 15px 20px;
+	  }
+
+	  nav ul {
+	    flex-direction: column;
+	    gap: 10px;
+	    width: 100%;
+	    margin-top: 10px;
+	  }
+
+	  h1 {
+	    font-size: 1.8rem;
+	  }
+
+	  thead th,
+	  tbody td {
+	    font-size: 0.9rem;
+	    padding: 10px 12px;
+	  }
+
+	  .container {
+	    padding: 0 10px;
+	  }
+
+	  .actions {
+	    flex-direction: column;
+	    gap: 8px;
+	  }
+
+	  .btn-link,
+	  button.btn {
+	    font-size: 0.85rem;
+	    padding: 6px 10px;
+	  }
+	}
+
+	@media (max-width: 500px) {
+	  .table-wrapper {
+	    overflow-x: auto;
+	  }
+
+	  table {
+	    min-width: 600px;
+	  }
+	}
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a th:href="@{/}" class="logo">ProjectGroups</a>
+    <ul>
+		<li><a th:href="@{/}" >Home</a></li>
+      <li><a th:href="@{/creategroup}">Create Group</a></li>
+	  <li><a th:href="@{/notification}">Notifications</a></li>
+	  <li><a th:href="@{/asamember}">As a teammember</a></li>
+	  <li><a th:href="@{/loginform}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <h1>Your Created Groups</h1>
+	<div class="table-wrapper">
+	  <table>
+	    <thead>
+	      <tr>
+	        <th>Group Name</th>
+	        <th>Description</th>
+	        <th>Actions</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr th:each="g : ${gs}">
+	        <td th:text="${g.name}"></td>
+	        <td th:text="${g.projectdesc}"></td>
+	        <td>
+	          <div class="actions">
+	            <a th:href="@{/deletegrp/{gid}(gid=${g.grp_id})}" class="btn-link">Delete</a>
+	            <a th:href="@{/list_of_people/{id}(id=${g.grp_id})}" class="btn-link">Add Team</a>
+	            <a th:href="@{/view_member/{gid}(gid=${g.grp_id})}" class="btn-link">View Team</a>
+	            <a th:href="@{/set_task/{gid}(gid=${g.grp_id})}" class="btn-link">Set Task</a>
+	            <a th:href="@{/assign_task_form/{gid}(gid=${g.grp_id})}" class="btn-link">Assign Task</a>
+	            <a th:href="@{/view_assign_task/{gid}(gid=${g.grp_id})}" class="btn-link">View Tasks</a>
+	            <a th:href="@{/live_chat/{uid}/{gid}(uid=${user.webuser_id},gid=${g.grp_id})}" class="btn-link">Live Chat</a>
+	          </div>
+	        </td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+
+  </div>
+
+</body>
+</html>
+
+
+
+
+

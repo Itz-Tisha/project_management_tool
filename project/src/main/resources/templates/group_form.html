@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Group</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eef2f7;
+      color: #333;
+    }
+
+    nav {
+      background-color: #0d6efd;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav .logo {
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #a8c0ff;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: 60px auto;
+      background: #ffffff;
+      padding: 35px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #222;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      background-color: #f9fbfc;
+      transition: border 0.3s ease;
+    }
+
+    form input:focus {
+      border-color: #4a90e2;
+      outline: none;
+      background-color: #fff;
+    }
+
+    form button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background-color: #4a90e2;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #357abd;
+    }
+
+    @media (max-width: 550px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .container {
+        margin: 30px 15px;
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a th:href="@{/}" class="logo">ProjectGroups</a>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/creategroup}">Create Group</a></li>
+      <li><a th:href="@{/notification}">Notifications</a></li>
+      <li><a th:href="@{/asamember}">As a teammember</a></li>
+      <li><a th:href="@{/loginform}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Create New Group</h2>
+    <form th:action="@{/makegrp}" method="post">
+      <label for="name">Group Name</label>
+      <input type="text" id="name" name="name" placeholder="e.g., Web Dev Team" required />
+
+      <label for="desc">Group Description</label>
+      <input type="text" id="desc" name="desc" placeholder="e.g., Handles front-end and UI tasks" required />
+
+      <button type="submit">Create Group</button>
+    </form>
+  </div>
+
+</body>
+</html>

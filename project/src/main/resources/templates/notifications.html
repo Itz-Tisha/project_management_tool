@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Groups Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    nav {
+      background-color: #0d6efd;
+      padding: 15px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav .logo {
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 10px 0 0 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #cde1ff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #222;
+      text-align: center;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    thead {
+      background-color: #e9ecef;
+      box-shadow: inset 0 -2px 0 #0d6efd;
+    }
+
+    thead th {
+      padding: 15px 20px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: left;
+      color: #555;
+    }
+
+    tbody tr {
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+    }
+
+    tbody tr:hover {
+      background-color: #f0f6ff;
+      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+    }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: 1rem;
+      color: #333;
+      vertical-align: middle;
+    }
+
+    .btn-link {
+      background-color: #28a745;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(40, 167, 69, 0.4);
+    }
+
+    .btn-link:hover {
+      background-color: #218838;
+      box-shadow: 0 4px 10px rgba(33, 136, 56, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+
+      thead {
+        display: none;
+      }
+
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      tbody tr {
+        margin-bottom: 15px;
+        border-radius: 6px;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        padding: 10px;
+      }
+
+      tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #555;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a th:href="@{/}" class="logo">ProjectGroups</a>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/creategroup}">Create Group</a></li>
+      <li><a th:href="@{/notification}">Notifications</a></li>
+      <li><a th:href="@{/asamember}">As a teammember</a></li>
+      <li><a th:href="@{/loginform}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Pending Group Invitations</h1>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Group Name</th>
+            <th>Message</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="ns : ${n}">
+            <td data-label="Group Name" th:text="${ns.grp.name}">Group Name</td>
+            <td data-label="Message" th:text="${ns.msg}">Message</td>
+            <td data-label="Action">
+              <a class="btn-link" th:href="@{/add_people/{u_id}/{id}(u_id=${ns.user.webuser_id}, id=${ns.grp.grp_id})}">
+                Accept
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
